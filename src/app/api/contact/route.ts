@@ -1,0 +1,37 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { sendContactMessage } from '@/lib/email';
+import { contactMessageInputSchema } from '@/lib/validation';
+import { allowPublicRequest } from '@/platform/public-api';
+
+/**
+ * Public contact form endpoint. Thin controller, mirroring the manual-requests
+ * route: bad JSON → 400, validation failure → 422, success → 201, anything
+ * thrown → 500. There's no database write — the message is handed to the
+ * env-selected notifier, which emails the owner when Resend is configured and
+ * logs it otherwise.
+ */
+export async function POST(request: NextRequest) {
+  if (!await allowPublicRequest(request, 'contact', 5, 60 * 60)) {
+    return NextResponse.json({ error: 'Too many messages. Please try again later.' }, { status: 429 });
+  }
+  const json = await request.json().catch(() => null);
+  if (!json) {
+    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+  }
+
+  const parsed = contactMessageInputSchema.safeParse(json);
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: 'Validation failed', details: parsed.error.flatten() },
+      { status: 422 }
+    );
+  }
+
+  try {
+    await sendContactMessage(parsed.data);
+    return NextResponse.json({ ok: true }, { status: 201 });
+  } catch (err) {
+    console.error('Failed to send contact message', err);
+    return NextResponse.json({ error: 'Could not send message' }, { status: 500 });
+  }
+}
