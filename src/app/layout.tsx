@@ -21,8 +21,8 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Surprise Pages — Gifts you did not know existed',
-  description: 'Discover thoughtful gifts from small Indian businesses, see how sellers were checked, and add a personal Surprise Page.',
+  title: 'Surprise Pages — Turn a gift into a moment',
+  description: 'Create a personalised one-page surprise with photos, memories, music or a countdown, then send it as one private link.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

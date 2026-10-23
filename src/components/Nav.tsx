@@ -30,7 +30,14 @@ import type { User } from '@supabase/supabase-js';
  */
 
 const LANDING_LINKS = [
-  { href: '#discover', label: 'discover gifts' },
+  { href: '#how', label: 'how it works' },
+  { href: '#pricing', label: 'pricing' },
+  { href: '/discover', label: 'discover gifts' },
+  { href: '#faq', label: 'faq' },
+];
+
+const DISCOVERY_LINKS = [
+  { href: '#discover', label: 'gift finder' },
   { href: '#trust', label: 'how we verify' },
   { href: '#sellers', label: 'for sellers' },
 ];
@@ -43,11 +50,12 @@ const PAPER_LINKS = [
 /** Routes that share the landing page's autumn chrome. The landing ("/") is
  *  autumn too, but keeps its own in-page anchor links, so it's tracked by
  *  `isLanding` separately below. */
-const AUTUMN_ROUTES = new Set(['/about', '/contact', '/examples']);
+const AUTUMN_ROUTES = new Set(['/about', '/contact', '/examples', '/discover']);
 
 export default function Nav() {
   const pathname = usePathname();
   const isLanding = pathname === '/';
+  const isDiscover = pathname === '/discover';
   // The builder/dashboard pages now wear the same autumn chrome as the brand
   // pages (they have no in-page anchors of their own, so they reuse the paper
   // link set that points back to /#pricing and /#faq).
@@ -105,8 +113,8 @@ export default function Nav() {
     };
   }, [open]);
 
-  const links = isLanding ? LANDING_LINKS : PAPER_LINKS;
-  const ctaLabel = isLanding ? 'find a gift' : isAutumn ? 'create a page' : 'Build yours';
+  const links = isDiscover ? DISCOVERY_LINKS : isLanding ? LANDING_LINKS : PAPER_LINKS;
+  const ctaLabel = isAutumn ? 'create a page' : 'Build yours';
 
   // On the autumn routes the bar is transparent over the hero and frosts to
   // cream once scrolled — or while the sheet is open, so it reads as solid.
@@ -177,14 +185,14 @@ export default function Nav() {
           </> : <Link href="/login?next=/account" className={`text-sm font-semibold transition-colors ${isAutumn ? 'text-[#3a2c27] hover:text-[#e23b2e]' : 'text-ink-muted hover:text-ink'}`}>Log in</Link>}
           {isAutumn ? (
             <Link
-              href={isLanding ? '/#discover' : '/builder'}
+              href="/builder"
               className="inline-flex items-center rounded-full bg-[#e23b2e] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_7px_0_#c22b22] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_9px_0_#c22b22] motion-reduce:transform-none motion-reduce:transition-none"
             >
               {ctaLabel}
             </Link>
           ) : (
             <Link
-              href={isLanding ? '/#discover' : '/builder'}
+              href="/builder"
               className="inline-flex items-center rounded-full bg-gradient-accent px-5 py-2 text-sm font-semibold text-ivory transition-opacity hover:opacity-90"
             >
               {ctaLabel}
