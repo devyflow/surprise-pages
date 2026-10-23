@@ -1,6 +1,7 @@
 import Nav from '@/components/Nav';
 import { fontVariables } from '@/components/marketing/typography';
 import './landing.css';
+import './discovery.css';
 
 /**
  * The font-variable wrapper lives here (not just on the landing page) so the

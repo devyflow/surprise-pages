@@ -1,5 +1,13 @@
 # Surprise Pages
 
+> **Discovery-platform branch:** the original Surprise Page builders and
+> materials are preserved. The homepage now prototypes an India-first gift
+> discovery experience with a Three.js gift universe, responsive CSS fallback,
+> working occasion/style/budget filters, saved items, evidence-led Trust
+> Passports, seller-pilot entry point, and Surprise Pages as the post-discovery
+> add-on. Catalogue entries are visibly marked as samples until real sellers
+> consent and complete verification.
+
 Self-serve builder for personalised one-page "surprise" gift links —
 birthdays, anniversaries, everyday surprises. India-first (₹ pricing,
 Razorpay). Next.js 14 (App Router), TypeScript, Tailwind, Supabase.

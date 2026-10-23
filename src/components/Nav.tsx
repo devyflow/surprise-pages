@@ -30,9 +30,9 @@ import type { User } from '@supabase/supabase-js';
  */
 
 const LANDING_LINKS = [
-  { href: '#how', label: 'how it works' },
-  { href: '#pricing', label: 'pricing' },
-  { href: '#faq', label: 'faq' },
+  { href: '#discover', label: 'discover gifts' },
+  { href: '#trust', label: 'how we verify' },
+  { href: '#sellers', label: 'for sellers' },
 ];
 
 const PAPER_LINKS = [
@@ -58,6 +58,7 @@ export default function Nav() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return;
     const supabase = getSupabaseBrowserClient();
     const updateAccount = (user: User | null) => {
       const metadata = user?.app_metadata as { role?: string } | undefined;
@@ -70,6 +71,7 @@ export default function Nav() {
   }, []);
 
   async function signOut() {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return;
     await getSupabaseBrowserClient().auth.signOut();
     window.location.assign('/');
   }
@@ -104,7 +106,7 @@ export default function Nav() {
   }, [open]);
 
   const links = isLanding ? LANDING_LINKS : PAPER_LINKS;
-  const ctaLabel = isAutumn ? 'create a page' : 'Build yours';
+  const ctaLabel = isLanding ? 'find a gift' : isAutumn ? 'create a page' : 'Build yours';
 
   // On the autumn routes the bar is transparent over the hero and frosts to
   // cream once scrolled — or while the sheet is open, so it reads as solid.
@@ -175,14 +177,14 @@ export default function Nav() {
           </> : <Link href="/login?next=/account" className={`text-sm font-semibold transition-colors ${isAutumn ? 'text-[#3a2c27] hover:text-[#e23b2e]' : 'text-ink-muted hover:text-ink'}`}>Log in</Link>}
           {isAutumn ? (
             <Link
-              href="/builder"
+              href={isLanding ? '/#discover' : '/builder'}
               className="inline-flex items-center rounded-full bg-[#e23b2e] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_7px_0_#c22b22] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_9px_0_#c22b22] motion-reduce:transform-none motion-reduce:transition-none"
             >
               {ctaLabel}
             </Link>
           ) : (
             <Link
-              href="/builder"
+              href={isLanding ? '/#discover' : '/builder'}
               className="inline-flex items-center rounded-full bg-gradient-accent px-5 py-2 text-sm font-semibold text-ivory transition-opacity hover:opacity-90"
             >
               {ctaLabel}

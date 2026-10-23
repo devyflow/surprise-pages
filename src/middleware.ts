@@ -11,9 +11,23 @@ export async function middleware(request: NextRequest) {
   // Build a response we can mutate with refreshed session cookies
   let response = NextResponse.next({ request: { headers: request.headers } });
 
+  // Marketing and discovery pages must remain previewable even when a local
+  // checkout has not been connected to Supabase yet. Protected routes still
+  // fail closed instead of pretending authentication succeeded.
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseAnonKey) {
+    if (guard) {
+      const loginUrl = new URL('/login', request.url);
+      loginUrl.searchParams.set('next', pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+    return response;
+  }
+
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         get(name) {
