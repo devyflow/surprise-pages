@@ -119,7 +119,7 @@ export const landingContent: LandingContent = {
         highlights: [
           'Up to 3 photos + your message',
           'Ready to send in minutes',
-          'Link never expires',
+          '12 months of hosting included',
         ],
       },
       {
@@ -160,31 +160,31 @@ export const landingContent: LandingContent = {
         swatch: 'var(--ink)',
         highlights: [
           'A designer builds it with you',
-          'Generous limits — more on request',
-          'Priority support',
+          'Scope agreed before payment',
+          'First response within 2 working hours',
         ],
       },
     ],
   },
 
   testimonials: {
-    eyebrow: 'from real senders',
-    title: 'Real reactions, real people',
+    eyebrow: 'what we build for',
+    title: 'The reactions behind the product',
     decoration: illustration('leaf.webp', '', 686, 780),
     items: [
       {
         quote: 'Sent this to my mom on her birthday — she watched the countdown all week.',
-        author: 'Adittya, Mumbai',
+        author: 'Birthday scenario',
         initial: 'R',
       },
       {
         quote: 'Took me five minutes to build and my best friend cried happy tears.',
-        author: 'Ananya, Pune',
+        author: 'Best-friend scenario',
         initial: 'A',
       },
       {
         quote: 'The White Glove tier felt like getting a gift wrapped by a friend, not a form.',
-        author: 'Kabir, Delhi',
+        author: 'White Glove scenario',
         initial: 'K',
       },
     ],
@@ -202,7 +202,7 @@ export const landingContent: LandingContent = {
       },
       {
         question: 'What if they don’t open it right away?',
-        answer: 'The link doesn’t expire on its own — it’s ready whenever they click it.',
+        answer: 'Every self-serve page includes 12 months of hosting, so there is no rush to open it. We will offer renewal or a downloadable keepsake before that period ends.',
       },
       {
         question: 'Can I edit it after I’ve sent the link?',
@@ -248,6 +248,7 @@ export const landingContent: LandingContent = {
           { label: 'Terms', href: '/terms' },
           { label: 'Refunds', href: '/refunds' },
           { label: 'Privacy', href: '/privacy' },
+          { label: 'Service standards', href: '/service-standards' },
         ],
       },
     ],

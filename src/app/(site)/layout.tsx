@@ -2,6 +2,7 @@ import Nav from '@/components/Nav';
 import { fontVariables } from '@/components/marketing/typography';
 import './landing.css';
 import './discovery.css';
+import VisitTracker from '@/components/analytics/VisitTracker';
 
 /**
  * The font-variable wrapper lives here (not just on the landing page) so the
@@ -13,6 +14,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
   return (
     <div className={`${fontVariables} sp-landing`}>
       <Nav />
+      <VisitTracker />
       {children}
     </div>
   );

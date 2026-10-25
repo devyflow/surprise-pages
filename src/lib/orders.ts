@@ -2,6 +2,7 @@ import { getSupabaseServerClient } from '@/lib/supabase';
 import { createPublicToken, createSlug } from '@/lib/slug';
 import { getTemplateDefinition } from '@/lib/templates';
 import type { CreateOrderInput, Order, OrderStatus } from '@/types';
+import { needsToRow, upsertCustomer } from '@/lib/customer-ops';
 
 interface OrderRow {
   id: string;
@@ -53,9 +54,21 @@ export async function createOrder(input: CreateOrderInput, ownerId: string | nul
   const slug = createSlug(input.config.data.recipientName);
   const publicToken = createPublicToken();
   const priceInPaise = getTemplateDefinition(input.config.tier).priceInPaise;
+  const customer = await upsertCustomer(input.customer);
   const { data, error } = await getSupabaseServerClient()
     .from('orders')
-    .insert({ slug, public_token: publicToken, status: 'draft', config: input.config, price_in_paise: priceInPaise, pin_code: input.pinCode, owner_id: ownerId })
+    .insert({
+      slug,
+      public_token: publicToken,
+      status: 'draft',
+      fulfillment_status: 'awaiting_payment',
+      config: input.config,
+      price_in_paise: priceInPaise,
+      pin_code: input.pinCode,
+      owner_id: ownerId,
+      customer_id: customer.id,
+      ...needsToRow(input.needs),
+    })
     .select()
     .single<OrderRow>();
 
@@ -128,6 +141,8 @@ export async function publishOrder(slug: string, razorpayPaymentId: string): Pro
   return updateOrder(slug, 'published', {
     razorpay_payment_id: razorpayPaymentId,
     paid_at: new Date().toISOString(),
+    fulfillment_status: 'paid',
+    expires_at: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
   });
 }
 

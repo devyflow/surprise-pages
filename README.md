@@ -1,12 +1,9 @@
 # Surprise Pages
 
-> **Discovery-platform branch:** the original Surprise Page builders and
-> materials are preserved. The homepage now prototypes an India-first gift
-> discovery experience with a Three.js gift universe, responsive CSS fallback,
-> working occasion/style/budget filters, saved items, evidence-led Trust
-> Passports, seller-pilot entry point, and Surprise Pages as the post-discovery
-> add-on. Catalogue entries are visibly marked as samples until real sellers
-> consent and complete verification.
+> **Product focus:** Surprise Pages is the primary product. The separate
+> `/discover` route remains an optional future gift-discovery experiment and
+> does not replace or overshadow the Surprise Pages homepage, builders, tiers,
+> customer journey, or admin workflow.
 
 Self-serve builder for personalised one-page "surprise" gift links —
 birthdays, anniversaries, everyday surprises. India-first (₹ pricing,
@@ -51,6 +48,7 @@ supabase/migrations/002_rate_limit_buckets.sql
 supabase/migrations/003_admin_actions.sql
 supabase/migrations/004_order_owners.sql          ← customer account dashboard
 supabase/migrations/005_private_page_tokens.sql   ← secure recipient URLs
+supabase/migrations/006_customer_ops_analytics.sql ← customers, fulfilment, traffic, settings
 ```
 
 `supabase/schema.sql` is an auto-generated snapshot of the cumulative state
@@ -65,6 +63,7 @@ migrations. Edit only the migration files, not the snapshot.
 - `RESEND_API_KEY` + `RESEND_TO_EMAIL` + `RESEND_FROM_EMAIL` (optional — manual requests still save without it)
 - `ADMIN_EMAILS` — comma-separated emails to promote to admin role via `scripts/grant-admin.mjs`
 - `ADMIN_ALERT_EMAIL` — receives urgent content-report notifications
+- `ANALYTICS_SALT` — long random value used for daily, non-reversible visitor hashes
 
 To grant a signed-in user admin access, set `ADMIN_EMAILS` and run:
 
@@ -183,3 +182,6 @@ rather than one-off animations per section, and all of it respects
 - Add rate-limiting on `POST /api/orders` and `POST /api/manual-requests`
   to stop spam.
 - Add a cron/edge function to expire `draft` orders older than ~24h.
+- The public static concept preview uses sample admin data. Real orders,
+  customers, calls, analytics and settings live only in this protected Next.js
+  application after migrations and production credentials are configured.

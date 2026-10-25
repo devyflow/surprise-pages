@@ -12,5 +12,7 @@ export const ADMIN_NAV: AdminNavItem[] = [
   { label: 'Dashboard', href: '/admin' },
   { label: 'Orders', href: '/admin/orders' },
   { label: 'Manual requests', href: '/admin/manual-requests' },
+  { label: 'Customers', href: '/admin/customers' },
+  { label: 'Site settings', href: '/admin/settings' },
   { label: 'Security', href: '/admin/security' },
 ];

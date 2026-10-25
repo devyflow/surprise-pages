@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react';
 
 export type OrderStatus = 'draft' | 'previewing' | 'paid' | 'published' | 'expired';
+export type FulfillmentStatus = 'awaiting_payment' | 'paid' | 'in_production' | 'needs_customer' | 'ready' | 'delivered' | 'cancelled' | 'refunded';
 export type TemplateTier = 'tier1' | 'tier2' | 'tier3' | 'tier4';
 export type VideoConfig = { kind: 'file'; url: string } | { kind: 'embed'; provider: 'youtube' | 'instagram'; url: string };
 
@@ -10,9 +11,11 @@ export interface Tier2Config { recipientName: string; senderName: string; introM
 export interface Tier3Config { recipientName: string; senderName: string; message: string; photoUrls: string[]; accentColor: string; revealAt: string; songUrl?: string; video?: VideoConfig; }
 export type TemplateConfig = { tier: 'tier1'; data: Tier1Config } | { tier: 'tier2'; data: Tier2Config } | { tier: 'tier3'; data: Tier3Config };
 export interface Order { id: string; slug: string; publicToken: string; status: OrderStatus; config: TemplateConfig; priceInPaise: number; pinCode: string; razorpayOrderId: string | null; razorpayPaymentId: string | null; ownerId: string | null; createdAt: string; paidAt: string | null; }
-export interface CreateOrderInput { config: TemplateConfig; pinCode: string; }
+export interface CustomerContact { fullName: string; email: string; phone?: string; preferredContact: 'email' | 'phone' | 'whatsapp'; contactConsent: boolean; }
+export interface CustomerNeeds { occasion: string; relationship: string; tone: string; preferredLanguage: string; requestedDeliveryAt?: string; specialRequests?: string; }
+export interface CreateOrderInput { config: TemplateConfig; pinCode: string; customer: CustomerContact; needs: CustomerNeeds; }
 
-export interface ManualRequestInput { tier: TemplateTier; recipientName: string; contactEmail: string; senderName?: string; occasion?: string; message?: string; notes?: string; }
+export interface ManualRequestInput { tier: TemplateTier; recipientName: string; contactEmail: string; contactPhone?: string; preferredContact: 'email' | 'phone' | 'whatsapp'; contactConsent: boolean; senderName?: string; occasion?: string; relationship?: string; tone?: string; preferredLanguage?: string; requestedDeliveryAt?: string; message?: string; notes?: string; }
 export interface ManualRequest extends ManualRequestInput { id: string; status: 'new' | 'in_progress' | 'delivered'; createdAt: string; }
 export interface ContactMessage { name: string; email: string; message: string; }
 

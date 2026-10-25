@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { BrandContent, FooterColumn, FooterContent } from '@/components/marketing/types';
+import VisitorCounter from '@/components/analytics/VisitorCounter';
 
 function Column({ column }: { column: FooterColumn }) {
   return (
@@ -55,7 +56,7 @@ export function SiteFooter({ brand, footer }: SiteFooterProps) {
         </div>
         <div className="sp-foot-bot">
           <span>{footer.copyright}</span>
-          <span>{footer.meta}</span>
+          <span><VisitorCounter /> · {footer.meta}</span>
         </div>
       </div>
     </footer>

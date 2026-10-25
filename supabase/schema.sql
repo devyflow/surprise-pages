@@ -71,3 +71,62 @@ create index if not exists admin_actions_target_idx on admin_actions (target_typ
 create index if not exists admin_actions_created_at_idx on admin_actions (created_at desc);
 
 alter table admin_actions enable row level security;
+
+create table if not exists customers (
+  id uuid primary key default gen_random_uuid(),
+  full_name text not null,
+  email text not null,
+  phone text,
+  preferred_contact text not null default 'email' check (preferred_contact in ('email', 'phone', 'whatsapp')),
+  contact_consent boolean not null default false,
+  source text not null default 'checkout',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+create unique index if not exists customers_email_lower_idx on customers (lower(email));
+create index if not exists customers_created_at_idx on customers (created_at desc);
+alter table customers enable row level security;
+
+alter table orders add column if not exists customer_id uuid references customers(id) on delete set null;
+alter table orders add column if not exists fulfillment_status text not null default 'awaiting_payment'
+  check (fulfillment_status in ('awaiting_payment', 'paid', 'in_production', 'needs_customer', 'ready', 'delivered', 'cancelled', 'refunded'));
+alter table orders add column if not exists occasion text;
+alter table orders add column if not exists relationship text;
+alter table orders add column if not exists tone text;
+alter table orders add column if not exists preferred_language text;
+alter table orders add column if not exists requested_delivery_at timestamptz;
+alter table orders add column if not exists special_requests text;
+alter table orders add column if not exists internal_notes text;
+alter table orders add column if not exists expires_at timestamptz;
+
+alter table manual_requests add column if not exists contact_phone text;
+alter table manual_requests add column if not exists preferred_contact text not null default 'email'
+  check (preferred_contact in ('email', 'phone', 'whatsapp'));
+alter table manual_requests add column if not exists contact_consent boolean not null default false;
+alter table manual_requests add column if not exists relationship text;
+alter table manual_requests add column if not exists tone text;
+alter table manual_requests add column if not exists preferred_language text;
+alter table manual_requests add column if not exists requested_delivery_at timestamptz;
+alter table manual_requests add column if not exists internal_notes text;
+
+create table if not exists traffic_daily (
+  visit_date date primary key,
+  page_views integer not null default 0,
+  unique_visitors integer not null default 0,
+  updated_at timestamptz not null default now()
+);
+create table if not exists traffic_daily_uniques (
+  visit_date date not null,
+  visitor_hash text not null,
+  created_at timestamptz not null default now(),
+  primary key (visit_date, visitor_hash)
+);
+create table if not exists site_settings (
+  key text primary key,
+  value jsonb not null,
+  updated_by uuid,
+  updated_at timestamptz not null default now()
+);
+alter table traffic_daily enable row level security;
+alter table traffic_daily_uniques enable row level security;
+alter table site_settings enable row level security;

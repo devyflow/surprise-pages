@@ -8,6 +8,7 @@ import ManualRequestForm from '@/components/ManualRequestForm';
 import { ALLOWED_ACCENT_COLORS } from '@/lib/validation';
 import { useOrderCheckout } from '@/components/builders/useOrderCheckout';
 import CheckoutAccountNotice from '@/components/builders/CheckoutAccountNotice';
+import CustomerNeedsFields, { EMPTY_CUSTOMER_CONTACT, EMPTY_CUSTOMER_NEEDS, validateCustomerJourney } from '@/components/builders/CustomerNeedsFields';
 import type { Tier1Config } from '@/types';
 
 const EMPTY_CONFIG: Tier1Config = {
@@ -23,6 +24,8 @@ export default function Tier1Builder() {
   const [config, setConfig] = useState<Tier1Config>(EMPTY_CONFIG);
   const [pinCode, setPinCode] = useState('');
   const [formError, setFormError] = useState<string | null>(null);
+  const [customer, setCustomer] = useState(EMPTY_CUSTOMER_CONTACT);
+  const [needs, setNeeds] = useState(EMPTY_CUSTOMER_NEEDS);
   const { stage, errorMessage, finalSlug, couponCode, setCouponCode, isSignedIn, payAndPublish } = useOrderCheckout();
 
   if (mode === 'manual') {
@@ -37,6 +40,8 @@ export default function Tier1Builder() {
 
   function handleSubmit() {
     setFormError(null);
+    const journeyError = validateCustomerJourney(customer, needs);
+    if (journeyError) { setFormError(journeyError); return; }
     if (pinCode.length !== 4) {
       setFormError('Choose a 4-digit PIN for the recipient first.');
       return;
@@ -45,7 +50,7 @@ export default function Tier1Builder() {
       setFormError('Add at least one photo URL.');
       return;
     }
-    payAndPublish({ tier: 'tier1', data: config }, pinCode);
+    payAndPublish({ tier: 'tier1', data: config }, pinCode, customer, needs);
   }
 
   if (stage === 'done' && finalSlug) {
@@ -167,6 +172,8 @@ export default function Tier1Builder() {
                 <label>Coupon code <span className="sp-form-note" style={{ textTransform: 'none' }}>— optional</span></label>
                 <input className="sp-input" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} placeholder="Enter coupon" />
               </div>
+
+              <CustomerNeedsFields contact={customer} needs={needs} onContactChange={setCustomer} onNeedsChange={setNeeds} />
 
               <CheckoutAccountNotice isSignedIn={isSignedIn} />
 

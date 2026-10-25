@@ -94,6 +94,28 @@ export const createOrderInputSchema = z.object({
   pinCode: z
     .string()
     .regex(/^\d{4}$/, 'PIN must be exactly 4 digits'),
+  customer: z.object({
+    fullName: z.string().trim().min(1).max(80),
+    email: z.string().trim().email(),
+    phone: z.string().trim().regex(/^\+?[0-9][0-9\s-]{7,16}$/, 'Enter a valid phone number').optional(),
+    preferredContact: z.enum(['email', 'phone', 'whatsapp']),
+    contactConsent: z.boolean(),
+  }).superRefine((value, ctx) => {
+    if (value.preferredContact !== 'email' && !value.phone) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'A phone number is required for calls or WhatsApp.', path: ['phone'] });
+    }
+    if (value.preferredContact !== 'email' && !value.contactConsent) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Consent is required before we call or message you.', path: ['contactConsent'] });
+    }
+  }),
+  needs: z.object({
+    occasion: z.string().trim().min(1).max(60),
+    relationship: z.string().trim().min(1).max(60),
+    tone: z.string().trim().min(1).max(40),
+    preferredLanguage: z.string().trim().min(1).max(40),
+    requestedDeliveryAt: z.string().datetime({ offset: true }).optional(),
+    specialRequests: z.string().trim().max(1000).optional(),
+  }),
 });
 
 export type Tier1ConfigInput = z.infer<typeof tier1ConfigSchema>;
@@ -108,8 +130,15 @@ export const manualRequestInputSchema = z.object({
   tier: z.enum(['tier1', 'tier2', 'tier3', 'tier4']),
   recipientName: z.string().trim().min(1).max(60),
   contactEmail: z.string().trim().email(),
+  contactPhone: z.string().trim().regex(/^\+?[0-9][0-9\s-]{7,16}$/).optional(),
+  preferredContact: z.enum(['email', 'phone', 'whatsapp']).default('email'),
+  contactConsent: z.boolean().default(false),
   senderName: z.string().trim().max(60).optional(),
   occasion: z.string().trim().max(60).optional(),
+  relationship: z.string().trim().max(60).optional(),
+  tone: z.string().trim().max(40).optional(),
+  preferredLanguage: z.string().trim().max(40).optional(),
+  requestedDeliveryAt: z.string().datetime({ offset: true }).optional(),
   message: z.string().trim().max(1000).optional(),
   notes: z.string().trim().max(1000).optional(),
 });

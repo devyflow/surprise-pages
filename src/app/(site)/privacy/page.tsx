@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     'What Surprise Pages collects when you create or receive a gift page, and how it is used.',
 };
 
-const LAST_UPDATED = '27 August 2026';
+const LAST_UPDATED = '25 October 2026';
 
 const link = 'text-marigold-deep underline underline-offset-2 hover:text-marigold';
 const mailto = `mailto:${SITE.supportEmail}`;
@@ -21,6 +21,8 @@ const sections: LegalSection[] = [
     bullets: [
       'The recipient’s name and your message.',
       'Your contact email, so we can send you the link and reach you about your order.',
+      'Your phone number only when you provide it, plus your chosen contact method and consent.',
+      'Your occasion, relationship, preferred tone, language, deadline, and special requests when supplied.',
       'Any photo or song links you choose to add.',
       <>
         Payment is handled entirely by Razorpay. <strong className="text-ink">We never
@@ -49,7 +51,7 @@ const sections: LegalSection[] = [
   {
     heading: 'Cookies',
     paras: [
-      'We do not use advertising or cross-site tracking cookies. We use only the essential storage needed to operate the site.',
+      'We do not use advertising or cross-site tracking cookies. A first-party visitor identifier is used to count visits without storing your raw IP address or building a cross-site profile.',
     ],
   },
   {

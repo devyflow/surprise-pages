@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { TemplateConfig } from '@/types';
+import type { CustomerContact, CustomerNeeds, TemplateConfig } from '@/types';
 import { getSupabaseBrowserClient } from '@/platform/supabase';
 
 export type CheckoutStage = 'editing' | 'creating' | 'paying' | 'done';
@@ -11,7 +11,7 @@ interface UseOrderCheckoutResult {
   couponCode: string;
   setCouponCode: (code: string) => void;
   isSignedIn: boolean | null;
-  payAndPublish: (config: TemplateConfig, pinCode: string) => Promise<void>;
+  payAndPublish: (config: TemplateConfig, pinCode: string, customer: CustomerContact, needs: CustomerNeeds) => Promise<void>;
   reset: () => void;
 }
 
@@ -41,7 +41,7 @@ export function useOrderCheckout(): UseOrderCheckoutResult {
     setErrorMessage(null);
   }
 
-  async function payAndPublish(config: TemplateConfig, pinCode: string) {
+  async function payAndPublish(config: TemplateConfig, pinCode: string, customer: CustomerContact, needs: CustomerNeeds) {
     setErrorMessage(null);
     setStage('creating');
 
@@ -49,7 +49,7 @@ export function useOrderCheckout(): UseOrderCheckoutResult {
       const createRes = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ config, pinCode }),
+        body: JSON.stringify({ config, pinCode, customer, needs }),
       });
 
       if (!createRes.ok) {

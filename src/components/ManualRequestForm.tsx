@@ -22,8 +22,15 @@ type Stage = 'editing' | 'submitting' | 'done';
 export default function ManualRequestForm({ tier, tierLabel, onBackToBuilder }: ManualRequestFormProps) {
   const [recipientName, setRecipientName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+  const [preferredContact, setPreferredContact] = useState<'email' | 'phone' | 'whatsapp'>('email');
+  const [contactConsent, setContactConsent] = useState(false);
   const [senderName, setSenderName] = useState('');
   const [occasion, setOccasion] = useState('');
+  const [relationship, setRelationship] = useState('');
+  const [tone, setTone] = useState('warm');
+  const [preferredLanguage, setPreferredLanguage] = useState('English');
+  const [requestedDeliveryAt, setRequestedDeliveryAt] = useState('');
   const [message, setMessage] = useState('');
   const [notes, setNotes] = useState('');
   const [stage, setStage] = useState<Stage>('editing');
@@ -40,6 +47,10 @@ export default function ManualRequestForm({ tier, tierLabel, onBackToBuilder }: 
       setError("Add your email so we know where to send it back.");
       return;
     }
+    if (preferredContact !== 'email' && (!contactPhone.trim() || !contactConsent)) {
+      setError('Add your phone number and allow order contact before choosing calls or WhatsApp.');
+      return;
+    }
 
     setStage('submitting');
 
@@ -51,8 +62,15 @@ export default function ManualRequestForm({ tier, tierLabel, onBackToBuilder }: 
           tier,
           recipientName,
           contactEmail,
+          contactPhone: contactPhone || undefined,
+          preferredContact,
+          contactConsent,
           senderName: senderName || undefined,
           occasion: occasion || undefined,
+          relationship: relationship || undefined,
+          tone,
+          preferredLanguage,
+          requestedDeliveryAt: requestedDeliveryAt ? new Date(requestedDeliveryAt).toISOString() : undefined,
           message: message || undefined,
           notes: notes || undefined,
         }),
@@ -129,6 +147,17 @@ export default function ManualRequestForm({ tier, tierLabel, onBackToBuilder }: 
               />
             </div>
 
+            <div className="sp-intake-grid">
+              <div className="sp-field">
+                <label>Phone <span className="sp-form-note">(optional)</span></label>
+                <input className="sp-input" inputMode="tel" placeholder="+91 98765 43210" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
+              </div>
+              <div className="sp-field">
+                <label>Preferred contact</label>
+                <select className="sp-input" value={preferredContact} onChange={(e) => setPreferredContact(e.target.value as typeof preferredContact)}><option value="email">Email</option><option value="phone">Phone call</option><option value="whatsapp">WhatsApp</option></select>
+              </div>
+            </div>
+
             <div className="sp-field">
               <label>Your name <span className="sp-form-note" style={{ textTransform: 'none' }}>(optional)</span></label>
               <input
@@ -148,6 +177,13 @@ export default function ManualRequestForm({ tier, tierLabel, onBackToBuilder }: 
                 onChange={(e) => setOccasion(e.target.value)}
                 maxLength={60}
               />
+            </div>
+
+            <div className="sp-intake-grid">
+              <div className="sp-field"><label>Relationship <span className="sp-form-note">(optional)</span></label><input className="sp-input" value={relationship} onChange={(e) => setRelationship(e.target.value)} placeholder="Partner, friend, parent…" maxLength={60} /></div>
+              <div className="sp-field"><label>Tone</label><select className="sp-input" value={tone} onChange={(e) => setTone(e.target.value)}><option value="warm">Warm</option><option value="romantic">Romantic</option><option value="playful">Playful</option><option value="elegant">Elegant</option><option value="funny">Funny</option></select></div>
+              <div className="sp-field"><label>Language</label><select className="sp-input" value={preferredLanguage} onChange={(e) => setPreferredLanguage(e.target.value)}><option>English</option><option>Hindi</option><option>Hinglish</option><option>Other</option></select></div>
+              <div className="sp-field"><label>Needed by <span className="sp-form-note">(optional)</span></label><input type="datetime-local" className="sp-input" value={requestedDeliveryAt} onChange={(e) => setRequestedDeliveryAt(e.target.value)} /></div>
             </div>
 
             <div className="sp-field">
@@ -173,6 +209,8 @@ export default function ManualRequestForm({ tier, tierLabel, onBackToBuilder }: 
                 maxLength={1000}
               />
             </div>
+
+            <label className="sp-consent"><input type="checkbox" checked={contactConsent} onChange={(e) => setContactConsent(e.target.checked)} /> Surprise Pages may contact me about this request. No promotional calls.</label>
 
             {error && <p className="sp-field-error">{error}</p>}
 

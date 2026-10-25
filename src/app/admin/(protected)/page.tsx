@@ -1,4 +1,5 @@
 import { getSupabaseServerClient } from '@/lib/supabase';
+import { getTrafficSummary } from '@/lib/analytics';
 
 async function getCount(table: string): Promise<number> {
   const supabase = getSupabaseServerClient();
@@ -9,14 +10,24 @@ async function getCount(table: string): Promise<number> {
 }
 
 export default async function AdminDashboard() {
-  const [ordersCount, manualRequestsCount] = await Promise.all([
+  const [ordersCount, manualRequestsCount, customersCount, traffic, revenueResult, pendingResult] = await Promise.all([
     getCount('orders'),
     getCount('manual_requests'),
+    getCount('customers'),
+    getTrafficSummary(),
+    getSupabaseServerClient().from('orders').select('price_in_paise').eq('status', 'published'),
+    getSupabaseServerClient().from('orders').select('*', { count: 'exact', head: true }).in('fulfillment_status', ['paid', 'in_production', 'needs_customer', 'ready']),
   ]);
+
+  const revenue = (revenueResult.data ?? []).reduce((sum, order) => sum + Number(order.price_in_paise || 0), 0) / 100;
 
   const cards = [
     { label: 'Total orders', value: ordersCount, href: '/admin/orders' },
     { label: 'Manual requests', value: manualRequestsCount, href: '/admin/manual-requests' },
+    { label: 'Customers', value: customersCount, href: '/admin/customers' },
+    { label: 'Needs attention', value: pendingResult.count ?? 0, href: '/admin/orders' },
+    { label: 'Actual visitors', value: traffic.uniqueVisitors, href: '/admin/settings' },
+    { label: 'Published revenue', value: `₹${revenue.toLocaleString('en-IN')}`, href: '/admin/orders' },
   ];
 
   return (
