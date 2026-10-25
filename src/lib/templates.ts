@@ -17,19 +17,19 @@ import Tier3Template from '@/components/templates/Tier3Template';
 const registry: Partial<Record<TemplateTier, TemplateDefinition>> = {
   tier1: {
     tier: 'tier1',
-    label: 'Tier 1 — Simple Wish',
+    label: 'Quick Surprise',
     priceInPaise: 9900,
     Component: Tier1Template,
   },
   tier2: {
     tier: 'tier2',
-    label: 'Tier 2 — Memory Lane',
-    priceInPaise: 19900,
+    label: 'Full Story — Timeline',
+    priceInPaise: 29900,
     Component: Tier2Template,
   },
   tier3: {
     tier: 'tier3',
-    label: 'Tier 3 — Time Capsule',
+    label: 'Full Story — Scheduled Reveal',
     priceInPaise: 29900,
     Component: Tier3Template,
   },

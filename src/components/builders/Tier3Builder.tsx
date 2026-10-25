@@ -41,7 +41,7 @@ export default function Tier3Builder() {
 
   if (mode === 'manual') {
     return (
-      <ManualRequestForm tier="tier3" tierLabel="Time Capsule" onBackToBuilder={() => setMode('diy')} />
+      <ManualRequestForm tier="tier3" tierLabel="Full Story — Scheduled Reveal" onBackToBuilder={() => setMode('diy')} />
     );
   }
 
@@ -86,7 +86,7 @@ export default function Tier3Builder() {
         <div className="sp-wrap">
           <div className="sp-builder-done">
             <div className="mark" aria-hidden="true">✓</div>
-            <h2>Your Time Capsule is sealed</h2>
+            <h2>Your Full Story is sealed</h2>
             <p>
               It takes a few seconds to go live. Share this link — and the 4-digit PIN — with{' '}
               {config.recipientName || 'them'}; it stays locked behind the countdown until your
@@ -106,17 +106,17 @@ export default function Tier3Builder() {
         <div className="sp-builder-grid">
           <div>
             <div className="sp-builder-intro">
-              <span className="sp-eyebrow">time capsule</span>
-              <h1>Seal your <span className="sp-script">Time Capsule</span></h1>
+              <span className="sp-eyebrow">full story · scheduled reveal</span>
+              <h1>Schedule your <span className="sp-script">Full Story</span></h1>
               <p className="lede">
                 Lock it behind a countdown so it opens at exactly the right moment — the
                 reveal is the gift.
               </p>
               <p className="sp-builder-switch">
                 Don&apos;t need a countdown?{' '}
-                <Link href="/builder" className="sp-alink">Simple Wish</Link>{' '}
+                <Link href="/builder" className="sp-alink">Quick Surprise</Link>{' '}
                 and{' '}
-                <Link href="/builder/tier2" className="sp-alink">Memory Lane</Link>{' '}
+                <Link href="/builder/tier2" className="sp-alink">Full Story timeline</Link>{' '}
                 publish instantly. Rather we made it for you?{' '}
                 <button type="button" onClick={() => setMode('manual')} className="sp-textlink">
                   Let us build it by hand

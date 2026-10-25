@@ -73,7 +73,7 @@ export const galleryContent: GalleryContent = {
     {
       occasion: 'Birthday',
       title: 'For Priya, turning 25',
-      tierLabel: 'Time Capsule',
+      tierLabel: 'Full Story — Scheduled Reveal',
       swatch: 'var(--wine)',
       quote: 'A midnight countdown, then twelve photos from the last twelve years.',
       image: illustration('offer.webp', 'A wrapped birthday gift', 732, 780),
@@ -82,7 +82,7 @@ export const galleryContent: GalleryContent = {
     {
       occasion: 'Anniversary',
       title: 'Two years — Aarav & Meera',
-      tierLabel: 'Memory Lane',
+      tierLabel: 'Full Story — Timeline',
       swatch: 'var(--red)',
       quote: 'Their whole story, one photo at a time, closing on the song from the first dance.',
       image: illustration('ribbonheart.webp', 'A heart tied with a ribbon', 750, 735),
@@ -91,7 +91,7 @@ export const galleryContent: GalleryContent = {
     {
       occasion: 'Just because',
       title: 'For Mom, on a Tuesday',
-      tierLabel: 'Simple Wish',
+      tierLabel: 'Quick Surprise',
       swatch: 'var(--amber)',
       quote: 'One photo, a few honest lines, sent for no reason at all.',
       image: illustration('letter.webp', 'A handwritten letter', 757, 482),
@@ -100,7 +100,7 @@ export const galleryContent: GalleryContent = {
     {
       occasion: 'Long distance',
       title: 'For Ishaan, an ocean away',
-      tierLabel: 'Memory Lane',
+      tierLabel: 'Full Story — Timeline',
       swatch: 'var(--red)',
       quote: 'Snapshots from home, laid out in the order you’d walk through the house.',
       image: illustration('hugheart.webp', 'Someone holding a big red heart', 720, 780),
@@ -109,7 +109,7 @@ export const galleryContent: GalleryContent = {
     {
       occasion: 'The big question',
       title: 'Will you, Ananya?',
-      tierLabel: 'Time Capsule',
+      tierLabel: 'Full Story — Scheduled Reveal',
       swatch: 'var(--wine)',
       quote: 'Locked until 8pm — then a countdown, a question, and a single photo.',
       image: illustration('joy.webp', 'A delighted person', 668, 780),
@@ -118,7 +118,7 @@ export const galleryContent: GalleryContent = {
     {
       occasion: 'Farewell',
       title: 'For the whole team',
-      tierLabel: 'White Glove',
+      tierLabel: 'Made for You',
       swatch: 'var(--ink)',
       quote: 'Forty notes from forty colleagues, hand-arranged into one page.',
       image: illustration('crown1.webp', 'A small paper crown', 624, 780),

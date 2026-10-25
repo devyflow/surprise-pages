@@ -138,11 +138,12 @@ export async function publishOrder(slug: string, razorpayPaymentId: string): Pro
   const existing = await getOrder(slug);
   // Razorpay can retry webhooks. Keep a completed order immutable.
   if (existing.status === 'published') return existing;
+  const hostingDays = existing.config.tier === 'tier1' ? 30 : 365;
   return updateOrder(slug, 'published', {
     razorpay_payment_id: razorpayPaymentId,
     paid_at: new Date().toISOString(),
     fulfillment_status: 'paid',
-    expires_at: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+    expires_at: new Date(Date.now() + hostingDays * 24 * 60 * 60 * 1000).toISOString(),
   });
 }
 

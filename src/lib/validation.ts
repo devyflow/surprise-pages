@@ -13,7 +13,7 @@ export const ALLOWED_ACCENT_COLORS = [
 ] as const;
 
 // A larger brand-safe palette offered on the higher self-serve tier
-// (Time Capsule) as its "custom theme colours" perk. Superset of
+// (Full Story scheduled reveal) as its "custom theme colours" perk. Superset of
 // ALLOWED_ACCENT_COLORS; still curated so a page can never look broken.
 export const EXPANDED_ACCENT_COLORS = [
   ...ALLOWED_ACCENT_COLORS,

@@ -43,7 +43,7 @@ const sections: LegalSection[] = [
   {
     heading: 'Payments and pricing',
     paras: [
-      'Prices are shown in Indian Rupees (₹) and charged once, through our payment processor Razorpay. White Glove is quoted separately before any work begins.',
+      'Prices are shown in Indian Rupees (₹) and charged once, through our payment processor Razorpay. Made for You is quoted separately before any work begins.',
       'We may change our prices, but a change never affects a page you have already paid for.',
     ],
   },

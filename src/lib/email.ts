@@ -2,7 +2,7 @@ import type { ContactMessage } from '@/types';
 import type { ManualRequest } from '@/types';
 
 const tierLabels: Record<ManualRequest['tier'], string> = {
-  tier1: 'Simple Wish', tier2: 'Memory Lane', tier3: 'Time Capsule', tier4: 'White Glove',
+  tier1: 'Quick Surprise', tier2: 'Full Story — Timeline', tier3: 'Full Story — Scheduled Reveal', tier4: 'Made for You',
 };
 
 async function sendEmail(subject: string, text: string, replyTo: string): Promise<void> {

@@ -45,9 +45,9 @@ const sections: LegalSection[] = [
     ],
   },
   {
-    heading: 'White Glove',
+    heading: 'Made for You',
     paras: [
-      'White Glove is a custom, hand-built service. Any deposit and its refund terms are agreed with you in writing before work starts, and are handled case by case.',
+      'Made for You is a custom, hand-built service. Any deposit and its refund terms are agreed with you in writing before work starts, and are handled case by case.',
     ],
   },
   {

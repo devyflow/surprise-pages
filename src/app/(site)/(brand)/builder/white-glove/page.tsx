@@ -3,5 +3,5 @@
 import ManualRequestForm from '@/components/ManualRequestForm';
 
 export default function WhiteGlovePage() {
-  return <ManualRequestForm tier="tier4" tierLabel="White Glove" />;
+  return <ManualRequestForm tier="tier4" tierLabel="Made for You" />;
 }

@@ -4,14 +4,14 @@
 
 Surprise Pages sells a private emotional experience, not generic web-design work. Every order must be traceable from intake to delivery, and every public promise must correspond to either automated behaviour or a named human step.
 
-## Tier fulfilment
+## Plan fulfilment
 
-| Tier | Intake | Production | Quality check | Delivery |
+| Plan | Intake | Production | Quality check | Delivery |
 |---|---|---|---|---|
-| Simple Wish ₹99 | Sender, recipient, message, 1–3 photos, contact and needs | Automatic template | Validation, preview, payment signature, private token and PIN | Immediate after verified payment |
-| Memory Lane ₹199 | Opening, closing, 2–10 memories, optional song/video, contact and needs | Automatic story template | All captions and media links validated | Immediate after verified payment |
-| Time Capsule ₹299 | Message, up to 15 photos, reveal time, theme, optional video, contact and needs | Automatic countdown template | Future timestamp, locked/revealed states and media validated | Link is immediate; content unlocks at the selected time |
-| White Glove ₹999+ | Short brief, relationship, tone, language, deadline and preferred contact | Human-owned production queue | Scope confirmation, mobile review, privacy check and one revision | First response within two working hours; delivery estimate agreed before payment |
+| Quick Surprise ₹99 | Sender, recipient, message, song, 1–3 photos, contact and needs | Free self-serve preview | Validation, payment signature, private token and PIN | Immediate after verified payment; 30 days hosting |
+| Full Story ₹299 — timeline | Opening, closing, 2–10 memories, optional song/video, contact and needs | Free self-serve story preview | All captions and media links validated | Immediate after verified payment; 1 year hosting |
+| Full Story ₹299 — scheduled reveal | Message, up to 15 photos, reveal time, theme, optional video, contact and needs | Free countdown preview | Future timestamp, locked/revealed states and media validated | Link is immediate; content unlocks at the selected time; 1 year hosting |
+| Made for You ₹1,499+ | Short brief, relationship, tone, language, deadline and preferred contact | Human-owned production queue | Scope confirmation, mobile review, privacy check and one revision | First response within two working hours; delivery deadline agreed before payment |
 
 ## Admin workflow
 

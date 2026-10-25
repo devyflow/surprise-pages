@@ -58,7 +58,7 @@ export default function Tier1Template({ config, isPreview }: TemplateProps<Tier1
 
         <p className="text-sm text-white/50">— {config.senderName || 'someone who cares'}</p>
 
-        {config.songUrl && !isPreview && (
+        {config.songUrl && (
           <audio controls className="mt-6 w-full">
             <source src={config.songUrl} />
           </audio>

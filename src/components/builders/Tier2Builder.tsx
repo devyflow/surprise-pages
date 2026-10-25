@@ -37,7 +37,7 @@ export default function Tier2Builder() {
 
   if (mode === 'manual') {
     return (
-      <ManualRequestForm tier="tier2" tierLabel="Memory Lane" onBackToBuilder={() => setMode('diy')} />
+      <ManualRequestForm tier="tier2" tierLabel="Full Story — Timeline" onBackToBuilder={() => setMode('diy')} />
     );
   }
 
@@ -88,7 +88,7 @@ export default function Tier2Builder() {
         <div className="sp-wrap">
           <div className="sp-builder-done">
             <div className="mark" aria-hidden="true">✓</div>
-            <h2>Your Memory Lane is on its way</h2>
+            <h2>Your Full Story is on its way</h2>
             <p>
               It takes a few seconds to go live. Once it does, share this link — and the
               4-digit PIN — with {config.recipientName || 'them'}.
@@ -107,18 +107,18 @@ export default function Tier2Builder() {
         <div className="sp-builder-grid">
           <div>
             <div className="sp-builder-intro">
-              <span className="sp-eyebrow">memory lane</span>
-              <h1>Build your <span className="sp-script">Memory Lane</span></h1>
+              <span className="sp-eyebrow">full story · timeline</span>
+              <h1>Build your <span className="sp-script">Full Story</span></h1>
               <p className="lede">
                 A handful of moments, laid out like a little story — add a song or a short
                 video to set the mood.
               </p>
               <p className="sp-builder-switch">
                 Just one message?{' '}
-                <Link href="/builder" className="sp-alink">A Simple Wish</Link>{' '}
+                <Link href="/builder" className="sp-alink">A Quick Surprise</Link>{' '}
                 might fit better, or add a{' '}
                 <Link href="/builder/tier3" className="sp-alink">countdown reveal</Link>{' '}
-                with a Time Capsule. Rather we made it for you?{' '}
+                with the scheduled-reveal version of Full Story. Rather we made it for you?{' '}
                 <button type="button" onClick={() => setMode('manual')} className="sp-textlink">
                   Let us build it by hand
                 </button>.
@@ -260,7 +260,7 @@ export default function Tier2Builder() {
                 disabled={stage === 'creating' || stage === 'paying'}
                 className="sp-btn sp-btn-red"
               >
-                {stage === 'editing' && (couponCode.trim().toUpperCase() === 'SPECIALONE' ? 'Pay ₹1 & get your link' : 'Pay ₹199 & get your link')}
+                {stage === 'editing' && (couponCode.trim().toUpperCase() === 'SPECIALONE' ? 'Pay ₹1 & get your link' : 'Pay ₹299 & get your link')}
                 {stage === 'creating' && 'Creating your page…'}
                 {stage === 'paying' && 'Opening payment…'}
               </button>

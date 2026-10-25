@@ -30,7 +30,7 @@ export default function Tier1Builder() {
 
   if (mode === 'manual') {
     return (
-      <ManualRequestForm tier="tier1" tierLabel="Simple Wish" onBackToBuilder={() => setMode('diy')} />
+      <ManualRequestForm tier="tier1" tierLabel="Quick Surprise" onBackToBuilder={() => setMode('diy')} />
     );
   }
 
@@ -60,7 +60,7 @@ export default function Tier1Builder() {
         <div className="sp-wrap">
           <div className="sp-builder-done">
             <div className="mark" aria-hidden="true">✓</div>
-            <h2>Your Simple Wish is on its way</h2>
+            <h2>Your Quick Surprise is on its way</h2>
             <p>
               It takes a few seconds to go live. Once it does, share this link — and the
               4-digit PIN — with {config.recipientName || 'them'}.
@@ -79,14 +79,14 @@ export default function Tier1Builder() {
         <div className="sp-builder-grid">
           <div>
             <div className="sp-builder-intro">
-              <span className="sp-eyebrow">simple wish</span>
-              <h1>Write your <span className="sp-script">Simple Wish</span></h1>
+              <span className="sp-eyebrow">quick surprise</span>
+              <h1>Build your <span className="sp-script">Quick Surprise</span></h1>
               <p className="lede">
                 A photo or three and a message that means it — ready to send in minutes.
               </p>
               <p className="sp-builder-switch">
                 Want a whole photo story?{' '}
-                <Link href="/builder/tier2" className="sp-alink">Build a Memory Lane</Link>{' '}
+                <Link href="/builder/tier2" className="sp-alink">Build a Full Story</Link>{' '}
                 instead. Rather we made it for you?{' '}
                 <button type="button" onClick={() => setMode('manual')} className="sp-textlink">
                   Let us build it by hand
@@ -137,6 +137,16 @@ export default function Tier1Builder() {
                       e.target.value.split(',').map((s) => s.trim()).filter(Boolean).slice(0, 3)
                     )
                   }
+                />
+              </div>
+
+              <div className="sp-field">
+                <label>Song link <span className="sp-form-note" style={{ textTransform: 'none' }}>— optional HTTPS audio URL</span></label>
+                <input
+                  className="sp-input"
+                  placeholder="https://…"
+                  value={config.songUrl ?? ''}
+                  onChange={(e) => updateField('songUrl', e.target.value.trim() || undefined)}
                 />
               </div>
 

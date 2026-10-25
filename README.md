@@ -15,12 +15,11 @@ Live: https://one-page-website-wine.vercel.app/
 
 | Tier | Price | What it is | Fulfillment |
 |---|---|---|---|
-| 1 — Simple Wish | ₹99 | One message, one card | Self-serve (`/builder`) or manual |
-| 2 — Memory Lane | ₹199 | Scrollable photo + caption sequence | Self-serve (`/builder/tier2`) or manual |
-| 3 — Time Capsule | ₹299 | Countdown lock, petal-reveal animation | Self-serve (`/builder/tier3`) or manual |
-| 4 — White Glove | From ₹999 | Fully custom | Manual only (`/builder/white-glove`) |
+| Quick Surprise | ₹99 | Message, music, up to 3 photos, 30-day hosting | Self-serve (`/builder`) or manual |
+| Full Story | ₹299 | Timeline (`/builder/tier2`) or scheduled reveal (`/builder/tier3`), 1-year hosting | Self-serve or manual |
+| Made for You | From ₹1,499 | Fully custom with one revision and agreed deadline | Manual only (`/builder/white-glove`) |
 
-Every tier now has **two fulfillment paths**, not just one:
+Every self-serve plan has **two fulfillment paths**, not just one:
 
 - **Self-serve ("DIY"):** fill the real builder form → live preview updates
   as you type → pay → page auto-publishes at `/p/[slug]`, no one involved.
@@ -29,7 +28,7 @@ Every tier now has **two fulfillment paths**, not just one:
   finished config. No payment, no auto-publish. It saves to Supabase and
   emails the owner (via Resend); the owner builds and delivers the page by
   hand. Reachable as a secondary CTA on every self-serve builder, and as
-  the only path for Tier 4.
+  the only path for Made for You.
 
 ## Setup
 
