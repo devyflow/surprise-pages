@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation';
 import { requireAdmin, AdminMfaRequiredError } from '@/platform/auth';
 
+export const dynamic = 'force-dynamic';
+
 /** Protects admin data while leaving /admin/security available for MFA enrolment. */
 export default async function ProtectedAdminLayout({ children }: { children: React.ReactNode }) {
   try {

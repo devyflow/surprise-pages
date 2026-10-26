@@ -37,7 +37,7 @@ export default function Tier3Builder() {
   const [formError, setFormError] = useState<string | null>(null);
   const [customer, setCustomer] = useState(EMPTY_CUSTOMER_CONTACT);
   const [needs, setNeeds] = useState(EMPTY_CUSTOMER_NEEDS);
-  const { stage, errorMessage, finalSlug, couponCode, setCouponCode, isSignedIn, payAndPublish } = useOrderCheckout();
+  const { stage, errorMessage, finalSlug, isSignedIn, payAndPublish } = useOrderCheckout();
 
   if (mode === 'manual') {
     return (
@@ -211,11 +211,6 @@ export default function Tier3Builder() {
                 />
               </div>
 
-              <div className="sp-field">
-                <label>Coupon code <span className="sp-form-note" style={{ textTransform: 'none' }}>— optional</span></label>
-                <input className="sp-input" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} placeholder="Enter coupon" />
-              </div>
-
               <CustomerNeedsFields contact={customer} needs={needs} onContactChange={setCustomer} onNeedsChange={setNeeds} />
 
               <CheckoutAccountNotice isSignedIn={isSignedIn} />
@@ -230,7 +225,7 @@ export default function Tier3Builder() {
                 disabled={stage === 'creating' || stage === 'paying'}
                 className="sp-btn sp-btn-red"
               >
-                {stage === 'editing' && (couponCode.trim().toUpperCase() === 'SPECIALONE' ? 'Pay ₹1 & get your link' : 'Pay ₹299 & get your link')}
+                {stage === 'editing' && 'Pay ₹299 & publish your link'}
                 {stage === 'creating' && 'Creating your page…'}
                 {stage === 'paying' && 'Opening payment…'}
               </button>

@@ -8,8 +8,6 @@ interface UseOrderCheckoutResult {
   stage: CheckoutStage;
   errorMessage: string | null;
   finalSlug: string | null;
-  couponCode: string;
-  setCouponCode: (code: string) => void;
   isSignedIn: boolean | null;
   payAndPublish: (config: TemplateConfig, pinCode: string, customer: CustomerContact, needs: CustomerNeeds) => Promise<void>;
   reset: () => void;
@@ -26,10 +24,14 @@ export function useOrderCheckout(): UseOrderCheckoutResult {
   const [stage, setStage] = useState<CheckoutStage>('editing');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [finalSlug, setFinalSlug] = useState<string | null>(null);
-  const [couponCode, setCouponCode] = useState('');
   const [isSignedIn, setIsSignedIn] = useState<boolean | null>(null);
 
   useEffect(() => {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      setIsSignedIn(false);
+      return;
+    }
+
     const supabase = getSupabaseBrowserClient();
     void supabase.auth.getUser().then(({ data }) => setIsSignedIn(Boolean(data.user)));
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => setIsSignedIn(Boolean(session?.user)));
@@ -66,7 +68,7 @@ export function useOrderCheckout(): UseOrderCheckoutResult {
       const payRes = await fetch(`/api/orders/${slug}/pay`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ couponCode }),
+        body: JSON.stringify({}),
       });
       if (!payRes.ok) throw new Error('Could not start payment');
       const { razorpayOrderId, amountInPaise, keyId } = await payRes.json();
@@ -116,5 +118,5 @@ export function useOrderCheckout(): UseOrderCheckoutResult {
     }
   }
 
-  return { stage, errorMessage, finalSlug, couponCode, setCouponCode, isSignedIn, payAndPublish, reset };
+  return { stage, errorMessage, finalSlug, isSignedIn, payAndPublish, reset };
 }

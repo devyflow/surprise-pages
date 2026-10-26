@@ -1,9 +1,10 @@
 # Surprise Pages
 
 > **Product focus:** Surprise Pages is the primary product. The separate
-> `/discover` route remains an optional future gift-discovery experiment and
-> does not replace or overshadow the Surprise Pages homepage, builders, tiers,
-> customer journey, or admin workflow.
+> `/discover` is a polished coming-soon page for the optional gift-discovery
+> product. It does not expose the unfinished catalogue and does not replace or
+> overshadow the Surprise Pages homepage, builders, plans, customer journey,
+> or admin workflow.
 
 Self-serve builder for personalised one-page "surprise" gift links —
 birthdays, anniversaries, everyday surprises. India-first (₹ pricing,

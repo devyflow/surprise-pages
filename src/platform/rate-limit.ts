@@ -3,7 +3,8 @@ import { getSupabaseServerClient } from '@/lib/supabase';
 /**
  * Table-based sliding-window rate limiter.
  * Returns true if the caller is within the limit, false if exceeded.
- * Fails open (returns true) on any database error to avoid blocking legitimate traffic.
+ * Fails closed on database errors so a storage outage cannot silently remove
+ * abuse protection from public order and contact endpoints.
  *
  * @param key           Unique identifier (e.g. 'report:1.2.3.4')
  * @param limit         Max requests allowed in the window
@@ -48,6 +49,6 @@ export async function rateLimit(
     return true;
   } catch (err) {
     console.error('[rateLimit] Unexpected error:', err);
-    return true; // fail open
+    return false;
   }
 }

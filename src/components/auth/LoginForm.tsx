@@ -42,7 +42,8 @@ export default function LoginForm({ next, initialError }: Props) {
     setLoading(true);
 
     const supabase = getSupabaseBrowserClient();
-    const redirectTo = `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=${encodeURIComponent(next)}`;
+    const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+    const redirectTo = `${siteOrigin}/auth/callback?next=${encodeURIComponent(next)}`;
 
     const { error: otpError } = await supabase.auth.signInWithOtp({
       email,

@@ -1,4 +1,5 @@
 import { fontVariables } from '@/components/marketing/typography';
+import Link from 'next/link';
 import { landingContent } from '@/components/marketing/content';
 import { FallingLeaves } from '@/components/marketing/effects/FallingLeaves';
 import {
@@ -27,6 +28,17 @@ export default function Page() {
       <EmotionBand content={c.emotionBand} />
       <Pricing content={c.pricing} />
       <Testimonials content={c.testimonials} />
+      <section className="sp-discovery-teaser sp-sec">
+        <div className="sp-wrap sp-discovery-teaser-grid">
+          <div className="sp-discovery-teaser-art"><img src="/illustrations/crown1.webp" alt="A wrapped gift" /></div>
+          <div>
+            <span className="sp-eyebrow">gift discovery · coming soon</span>
+            <h2>Still looking for the physical gift?</h2>
+            <p>We&apos;re preparing a carefully reviewed collection from independent Indian businesses. Surprise Pages remains ready whenever you already have the gift—or only need the moment around it.</p>
+            <Link href="/discover" className="sp-btn sp-btn-outline">see what we&apos;re preparing →</Link>
+          </div>
+        </div>
+      </section>
       <Faq content={c.faq} />
       <FinalCta content={c.finalCta} />
       <SiteFooter brand={c.brand} footer={c.footer} />

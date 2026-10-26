@@ -184,12 +184,12 @@ export const landingContent: LandingContent = {
     items: [
       {
         question: 'Do I need to make an account?',
-        answer: 'No. Pick a tier, fill it in, pay, and you get a link. Nothing to sign up for on either end.',
+        answer: 'No. Pick a plan, build the live preview, and pay only when you are ready to publish. The recipient needs no account.',
         defaultOpen: true,
       },
       {
         question: 'What if they don’t open it right away?',
-        answer: 'Every self-serve page includes 12 months of hosting, so there is no rush to open it. We will offer renewal or a downloadable keepsake before that period ends.',
+        answer: 'Quick Surprise includes 30 days of hosting. Either Full Story format includes one year. Made for You hosting is confirmed in the written scope.',
       },
       {
         question: 'Can I edit it after I’ve sent the link?',
@@ -218,6 +218,7 @@ export const landingContent: LandingContent = {
           { label: 'Full Story — Timeline', href: '/builder/tier2' },
           { label: 'Full Story — Scheduled Reveal', href: '/builder/tier3' },
           { label: 'Made for You', href: '/builder/white-glove' },
+          { label: 'Gift discovery — coming soon', href: '/discover' },
         ],
       },
       {

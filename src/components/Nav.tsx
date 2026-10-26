@@ -32,14 +32,14 @@ import type { User } from '@supabase/supabase-js';
 const LANDING_LINKS = [
   { href: '#how', label: 'how it works' },
   { href: '#pricing', label: 'pricing' },
-  { href: '/discover', label: 'discover gifts' },
+  { href: '/discover', label: 'discover gifts · soon' },
   { href: '#faq', label: 'faq' },
 ];
 
 const DISCOVERY_LINKS = [
-  { href: '#discover', label: 'gift finder' },
-  { href: '#trust', label: 'how we verify' },
-  { href: '#sellers', label: 'for sellers' },
+  { href: '/', label: 'home' },
+  { href: '/#how', label: 'how it works' },
+  { href: '/#pricing', label: 'pricing' },
 ];
 
 const PAPER_LINKS = [

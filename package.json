@@ -2,6 +2,9 @@
   "name": "surprise-pages-tier1",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20 <23"
+  },
   "scripts": {
     "dev": "node scripts/dev-server.mjs",
     "build": "next build",

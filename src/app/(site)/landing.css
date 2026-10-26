@@ -337,6 +337,17 @@
 .sp-sharelink{display:block;word-break:break-all;background:var(--paper);border:1.5px solid var(--line);
   border-radius:12px;padding:12px 14px;font-family:var(--font-mono,ui-monospace),monospace;font-size:.85rem;color:var(--ink)}
 
+/* Gift discovery stays visible without presenting unfinished marketplace UI. */
+.sp-discovery-teaser{background:linear-gradient(135deg,#fce6d2,#fff7eb)}
+.sp-discovery-teaser-grid{display:grid;grid-template-columns:.75fr 1.25fr;align-items:center;gap:clamp(36px,7vw,80px)}
+.sp-discovery-teaser-art{position:relative;min-height:340px;display:grid;place-items:center}
+.sp-discovery-teaser-art::before{content:"";position:absolute;width:300px;height:300px;border:1px dashed rgba(142,36,56,.25);border-radius:50%}
+.sp-discovery-teaser-art img{position:relative;width:min(90%,300px);height:auto;filter:drop-shadow(0 24px 22px rgba(80,25,15,.22));animation:sp-bob 7s ease-in-out infinite}
+.sp-discovery-teaser h2{max-width:13ch;margin:.25em 0;font:800 clamp(2.35rem,4.5vw,3.9rem)/1.03 var(--font-fraunces),Georgia,serif}
+.sp-discovery-teaser p{max-width:38rem;margin:0 0 25px;color:var(--ink2);font-size:1.04rem;line-height:1.7}
+@media(max-width:760px){.sp-discovery-teaser-grid{grid-template-columns:1fr;text-align:center}.sp-discovery-teaser-art{min-height:270px}.sp-discovery-teaser-art::before{width:245px;height:245px}.sp-discovery-teaser-art img{width:240px}.sp-discovery-teaser h2,.sp-discovery-teaser p{margin-left:auto;margin-right:auto}}
+@media(prefers-reduced-motion:reduce){.sp-discovery-teaser-art img{animation:none}}
+
 
 
 

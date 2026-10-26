@@ -37,10 +37,7 @@ export async function notifyManualRequest(request: ManualRequest): Promise<void>
 
 export async function sendContactMessage(message: ContactMessage): Promise<void> {
   if (!emailIsConfigured()) {
-    console.warn(
-      `[contact] Email not configured. Message from ${message.name} <${message.email}>:\n${message.message}`
-    );
-    return;
+    throw new Error('Contact email is not configured.');
   }
   await sendEmail(`New contact message from ${message.name}`, `From: ${message.name} <${message.email}>\n\n${message.message}`, message.email);
 }
